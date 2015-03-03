@@ -1,0 +1,44 @@
+.validationdemoform {
+	background: none repeat scroll 0 0 #fff;
+    border-radius: 5px;
+    margin: 100px auto;
+    max-width: 400px;
+}
+.validationdemoform .form-control {
+	background: none repeat scroll 0 0 #eaeaec;
+    border: 1px solid #eaeaec;
+    border-radius: 5px;
+    box-shadow: none;
+    font-size: 12px;
+}
+.validationdemoform .form-control.error {
+	background-color:#f2dede;
+    border-color: #a94442;
+    color:#a94442;
+}
+.validationdemoform .control-label {
+	padding : 5px 0px;
+}
+.validationdemoform .checkbox label,.validationdemoform .radio label {
+	width: 100%;
+}
+.validationdemoform abbr[title] {
+	border-bottom:none;
+	color: #FF0000; 
+}
+.validationdemoform span.errormsg {
+	color: #ff0000;
+	display: inline-block;
+	text-align: right;
+	width: 100%;
+}
+.validationdemoform .terms_cond label {
+	padding: 0px;
+}
+.validationdemoform .terms_cond span.errormsg {
+	text-align: left;
+	padding-left: 10px;
+}
+.validationdemoform .gender span.errormsg {
+	text-align: left;
+}
