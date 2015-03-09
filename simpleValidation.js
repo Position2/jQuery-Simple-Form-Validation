@@ -1,6 +1,6 @@
 (function($) {
     $.fn.simpleValidation = function(opts) {
-        var options = $.extend({
+        var options = $.extend({ 
                          "errorFieldClass"   : "error",
                          "errorMsgTag"       : "span",
                          "errorMsgClass"     : "errormsg",
