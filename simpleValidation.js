@@ -9,7 +9,7 @@
                                                     "email"        : "Please enter valid email",
                                                     "alphabet"     : "Please enter letters only",
                                                     "number"       : "Please enter numbers only",
-                                                    "alphanumber"  : "Please don't enter any special character or space"
+                                                    "alphanumeric"  : "Please don't enter any special character or space"
                                                 }
                       }, opts);
         return this.each(function() {
@@ -57,7 +57,7 @@
                         (!alphaReg.test(disVal)) ? addErrorMsg(dis,disPatErrorMsg || options.otherErrorMsg.alphabet) : removeErrorMsg(dis); 
                     } else if(dis.attr("data-sfv-validation") == "number") {
                         (!numericReg.test(disVal)) ? addErrorMsg(dis,disPatErrorMsg || options.otherErrorMsg.number) : removeErrorMsg(dis); 
-                    } else if(dis.attr("data-sfv-validation") == "alphanumber") {
+                    } else if(dis.attr("data-sfv-validation") == "alphanumeric") {
                         (!alphanumericReg.test(disVal)) ? addErrorMsg(dis,disPatErrorMsg || options.otherErrorMsg.alphanumeric) : removeErrorMsg(dis); 
                     } else if(disPattern != "" &&  typeof(disPattern) != "undefined") {
                         disPattern = new RegExp("^" + disPattern + "$");
