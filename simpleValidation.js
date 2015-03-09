@@ -52,13 +52,13 @@
                     disRequErrorMsg = dis.attr("data-sfv-require-errorMsg");
                 if(disVal != "") {
                     if(dis.attr("type") == "email" || (dis.attr("data-sfv-validation") == "email")) {
-                        (!emailReg.test(disVal)) ? addErrorMsg(dis,options.otherErrorMsg.email) : removeErrorMsg(dis); 
+                        (!emailReg.test(disVal)) ? addErrorMsg(dis,disPatErrorMsg || options.otherErrorMsg.email) : removeErrorMsg(dis); 
                     } else if(dis.attr("data-sfv-validation") == "alpha") {
-                        (!alphaReg.test(disVal)) ? addErrorMsg(dis,options.otherErrorMsg.alphabet) : removeErrorMsg(dis); 
+                        (!alphaReg.test(disVal)) ? addErrorMsg(dis,disPatErrorMsg || options.otherErrorMsg.alphabet) : removeErrorMsg(dis); 
                     } else if(dis.attr("data-sfv-validation") == "number") {
-                        (!numericReg.test(disVal)) ? addErrorMsg(dis,options.otherErrorMsg.number) : removeErrorMsg(dis); 
+                        (!numericReg.test(disVal)) ? addErrorMsg(dis,disPatErrorMsg || options.otherErrorMsg.number) : removeErrorMsg(dis); 
                     } else if(dis.attr("data-sfv-validation") == "alphanumber") {
-                        (!alphanumericReg.test(disVal)) ? addErrorMsg(dis,options.otherErrorMsg.alphanumeric) : removeErrorMsg(dis); 
+                        (!alphanumericReg.test(disVal)) ? addErrorMsg(dis,disPatErrorMsg || options.otherErrorMsg.alphanumeric) : removeErrorMsg(dis); 
                     } else if(disPattern != "" &&  typeof(disPattern) != "undefined") {
                         disPattern = new RegExp("^" + disPattern + "$");
                         (!disPattern.test(disVal)) ? addErrorMsg(dis,disPatErrorMsg || options.errorMsg) : removeErrorMsg(dis); 
