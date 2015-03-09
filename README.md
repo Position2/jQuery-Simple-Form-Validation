@@ -2,7 +2,7 @@
 A Simple jQuery Plugin for Form Validation
   SimpleValidation is a javascript form validation library.If you need to do some client side validation , simpleValidation is the best one.
   
-  Here the steps to configure...
+  Here the steps to configure... 
     Step 1 :
     	Download and link to the Jquery plugin
     Step 2 :
