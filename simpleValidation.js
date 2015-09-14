@@ -6,9 +6,10 @@
                          "errorMsgClass"     : "errormsg",
                          "errorMsg"          : "Required Field",
                          "otherErrorMsg"     :  {
-                                                    "email"        : "Please enter valid email",
-                                                    "alphabet"     : "Please enter letters only",
-                                                    "number"       : "Please enter numbers only",
+                                                    "email"         : "Please enter valid email",
+                                                    "companyemail"  : "Please enter company email",
+                                                    "alphabet"      : "Please enter letters only",
+                                                    "number"        : "Please enter numbers only",
                                                     "alphanumeric"  : "Please don't enter any special character or space"
                                                 }
                       }, opts);
@@ -17,6 +18,7 @@
                 valChRaElems    = $("input[data-sfv-required='yes'][type='checkbox'],input[data-sfv-required='yes'][type='radio']",curForm),
                 valElems        = $("input[data-sfv-required='yes'],input[data-sfv-validation]:not(input[data-sfv-required='yes']),input[data-sfv-regex]:not(input[data-sfv-required='yes']),select[data-sfv-required='yes'],textarea[data-sfv-required='yes']",curForm).not(valChRaElems),
                 emailReg        = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/,
+                ComEmailReg     = /^([\w+\-\.]+@(?!gmail.com)(?!hotmail.com)(?!live.com)(?!outlook.com)(?!yahoo.com)(?!ymail.com)(?!rocketmail.com)(?!aol.com)(?!mac.comme.com)(?!icloud.com)(?!inbox.com)(?!sina.com)(?!qq.com)(?!foxmail.com)(?!163.com)(?!126.com)(?!189.cn 263.net)(?!yeah.net)(?!gmx.com)(?!gmx.net)(?!mail.com)(?!mail.ru)(?!rambler.ru)(?!lenta.ru)(?!autorambler.ru)(?!myrambler.ru)(?!ro.ru)(?!yandex.ru)(?!zoho.com)(?!msn.com)(?!webtown.com)(?!rediffmail.com)([\w\-]+\.)+[\w\-]{2,4})?$/,
                 alphaReg        = /^[A-Za-z]+$/,
                 numericReg      = /^[0-9]+$/,
                 alphanumericReg = /^[0-9a-zA-Z]+$/,
@@ -51,7 +53,15 @@
                     disPatErrorMsg  = dis.attr("data-sfv-regEx-errorMsg"),
                     disRequErrorMsg = dis.attr("data-sfv-require-errorMsg");
                 if(disVal != "") {
-                    if(dis.attr("type") == "email" || (dis.attr("data-sfv-validation") == "email")) {
+                    if (dis.attr("type") == "companyemail" || (dis.attr("data-sfv-validation") == "companyemail")) {
+                        if (!emailReg.test(disVal)) {
+                            addErrorMsg(dis, disPatErrorMsg || options.otherErrorMsg.email);
+                        } else if (!ComEmailReg.test(disVal)) {
+                            addErrorMsg(dis, disPatErrorMsg || options.otherErrorMsg.companyemail);
+                        } else {
+                            removeErrorMsg(dis);
+                        }
+                    } else if(dis.attr("type") == "email" || (dis.attr("data-sfv-validation") == "email")) {
                         (!emailReg.test(disVal)) ? addErrorMsg(dis,disPatErrorMsg || options.otherErrorMsg.email) : removeErrorMsg(dis); 
                     } else if(dis.attr("data-sfv-validation") == "alpha") {
                         (!alphaReg.test(disVal)) ? addErrorMsg(dis,disPatErrorMsg || options.otherErrorMsg.alphabet) : removeErrorMsg(dis); 
