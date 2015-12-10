@@ -116,8 +116,26 @@ $("#formid").simpleValidation({
  ```javascript
  $("#formid").simpleValidation({
      "beforeSubmit" : function(form) {
+       //form - current form
        //add loader class to the form 
        form.addClass("loader")
+     }
+});
+ ```
+ 
+ *  **After Submit**
+  Executes immediately after the form is submitted
+
+ *Example :*
+ ```javascript
+ $("#formid").simpleValidation({
+      //options...
+     },function(data,form) {
+       //data - ajax value return
+       //form - current form
+       if(data == "succcess") {
+        form.removeClass("loader")
+       }
      }
 });
  ```
