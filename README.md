@@ -123,7 +123,7 @@ $("#formid").simpleValidation({
 });
  ```
  
- *  **After Submit**
+*  **After Submit**
   Executes immediately after the form is submitted
 
  *Example :*
