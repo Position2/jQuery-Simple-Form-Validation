@@ -27,7 +27,10 @@ $(document).ready(function(){
 
  * **data-ajax="true"**
  
- *Example :  <form action="" id="" data-ajax="true">*
+ *Example :*
+```HTML
+<form action="" id="" data-ajax="true">
+ ```
  
  Form ajax submission
  * **data-sfv-required="yes"**
