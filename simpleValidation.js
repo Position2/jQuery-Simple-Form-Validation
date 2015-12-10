@@ -1,5 +1,5 @@
 (function($) {
-    $.fn.simpleValidation = function(opts) {
+    $.fn.simpleValidation = function(opts, callback) {
         var options = $.extend({ 
                          "errorFieldClass"   : "error",
                          "errorMsgTag"       : "span",
@@ -10,13 +10,17 @@
                                                     "companyemail"  : "Please enter company email",
                                                     "alphabet"      : "Please enter letters only",
                                                     "number"        : "Please enter numbers only",
-                                                    "alphanumeric"  : "Please don't enter any special character or space"
-                                                }
+                                                    "alphanumeric"  : "Please don't enter any special character or space",
+                                                    "compare"       : "Please enter the same value again"
+                                                },
+                         "beforeSubmit"        : ""
                       }, opts);
         return this.each(function() {
             var curForm         = $(this),
+                curFormAjax     = curForm.attr("data-ajax") || false,
                 valChRaElems    = $("input[data-sfv-required='yes'][type='checkbox'],input[data-sfv-required='yes'][type='radio']",curForm),
-                valElems        = $("input[data-sfv-required='yes'],input[data-sfv-validation]:not(input[data-sfv-required='yes']),input[data-sfv-regex]:not(input[data-sfv-required='yes']),select[data-sfv-required='yes'],textarea[data-sfv-required='yes']",curForm).not(valChRaElems),
+                valElems        = $("input[data-sfv-required='yes'],input[data-sfv-validation]:not(input[data-sfv-required='yes']),input[data-sfv-regex]:not(input[data-sfv-required='yes']),input[data-sfv-compare]:not(input[data-sfv-required='yes']),select[data-sfv-required='yes'],textarea[data-sfv-required='yes']",curForm).not(valChRaElems),
+                cmpElem         = $("input[data-sfv-compare]",curForm),
                 emailReg        = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/,
                 ComEmailReg     = /^([\w+\-\.]+@(?!gmail.com)(?!hotmail.com)(?!live.com)(?!outlook.com)(?!yahoo.com)(?!ymail.com)(?!rocketmail.com)(?!aol.com)(?!mac.comme.com)(?!icloud.com)(?!inbox.com)(?!sina.com)(?!qq.com)(?!foxmail.com)(?!163.com)(?!126.com)(?!189.cn 263.net)(?!yeah.net)(?!gmx.com)(?!gmx.net)(?!mail.com)(?!mail.ru)(?!rambler.ru)(?!lenta.ru)(?!autorambler.ru)(?!myrambler.ru)(?!ro.ru)(?!yandex.ru)(?!zoho.com)(?!msn.com)(?!webtown.com)(?!rediffmail.com)([\w\-]+\.)+[\w\-]{2,4})?$/,
                 alphaReg        = /^[A-Za-z]+$/,
@@ -25,6 +29,9 @@
                 errorElem       = $("<"+options.errorMsgTag+"/>",{
                                       "class" : options.errorMsgClass
                                   });
+            if(cmpElem.size() > 0) {
+                valElems = valElems.add($(cmpElem.attr("data-sfv-compare")));
+            }
             //Disable HTML5 default validation
             curForm.attr("novalidate","");
             //Add Erro message
@@ -50,6 +57,11 @@
                     disName         = dis.attr("name"),
                     disRequ         = dis.attr("data-sfv-required"),
                     disPattern      = dis.attr("data-sfv-regex"),
+                    disCompare      = dis.attr("data-sfv-compare"),
+                    disCompareElem  = $(disCompare),
+                    compareElem     = $("[data-sfv-compare]",curForm),
+                    compareElemW    = $(compareElem.attr("data-sfv-compare")),
+                    disCompareVal   = disCompare != "" &&  typeof(disCompare) != "undefined" ? disCompareElem.val().trim() : "",
                     disPatErrorMsg  = dis.attr("data-sfv-regEx-errorMsg"),
                     disRequErrorMsg = dis.attr("data-sfv-require-errorMsg");
                 if(disVal != "") {
@@ -72,6 +84,10 @@
                     } else if(disPattern != "" &&  typeof(disPattern) != "undefined") {
                         disPattern = new RegExp("^" + disPattern + "$");
                         (!disPattern.test(disVal)) ? addErrorMsg(dis,disPatErrorMsg || options.errorMsg) : removeErrorMsg(dis); 
+                    } else if(disCompare != "" &&  typeof(disCompare) != "undefined" && disCompareElem.size() > 0 && disCompareVal != "") {
+                        (disVal != disCompareVal) ? addErrorMsg(disCompareElem,disPatErrorMsg || options.otherErrorMsg.compare) : removeErrorMsg(disCompareElem); 
+                    } else if(compareElemW.attr("id") == dis.attr("id")) {
+                        (disVal != compareElem.val()) ? addErrorMsg(dis,disPatErrorMsg || options.otherErrorMsg.compare) : removeErrorMsg(dis); 
                     } else {
                         removeErrorMsg(dis);
                     }
@@ -90,12 +106,31 @@
             }
             //on Form submit
             curForm.on("submit",function(e) {
+                var disForm = $(this);
                 valElems.add(valChRaElems).each(function() {
                     var disType = $(this).attr("type");
                     (disType == "checkbox" || disType == "radio") ? validateChRb(this) : validate(this);
                 });
                 if($("."+options.errorFieldClass+",."+options.errorMsgClass,$(this)).size() <= 0) {
-                    return true;
+                    if(curFormAjax) {
+                        if (typeof options.beforeSubmit == 'function') {
+                            options.beforeSubmit.call(this,disForm);
+                        }
+                        $.ajax({
+                            type    : curForm.attr("method"),
+                            url     : curForm.attr("action"),
+                            data    : disForm.serialize(),
+                            success : function(data) {
+                                if (typeof callback == 'function') {
+                                    callback.call(this,data,disForm);
+                                }
+                            }
+                        });
+                        return false;
+                    }
+                    else {
+                        return true;
+                    }
                 }
                 e.preventDefault();
             });
