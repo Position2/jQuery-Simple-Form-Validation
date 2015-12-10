@@ -107,6 +107,20 @@ $("#formid").simpleValidation({
      "errorMsg" : "Required Field",
 });
  ```
+ 
+##Callbacks(if the form is ajax submit)
+*  **beforeSubmit**
+  Executes before the form submit
+
+ *Example :*
+ ```javascript
+ $("#formid").simpleValidation({
+     "beforeSubmit" : function(form) {
+       //add loader class to the form 
+       form.addClass("loader")
+     }
+});
+ ```
 
 ##Style error message and field
 
