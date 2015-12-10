@@ -25,6 +25,11 @@ $(document).ready(function(){
 
 ##Data attributes
 
+ * **data-ajax="true"**
+ 
+ *Example :  <form action="" id="" data-ajax="true">*
+ 
+ Form ajax submission
  * **data-sfv-required="yes"**
  
  To make the field mandatory.
@@ -34,6 +39,11 @@ $(document).ready(function(){
   * data-sfv-validation="**alpha**"  : To validate alphabetic (*eg : abcdef*)
   * data-sfv-validation="**number**" : To validate number (*eg : 12345*)
   * data-sfv-validation="**alphanumeric**" : To validate alphanumeric (*eg : abc123*)
+ * **data-sfv-compare**
+ 
+ To compare two field.eg. Password and confirm password fields
+ 
+ *Example :  data-sfv-compare="#fieldtocompare"*
  * **data-sfv-require-errorMsg**
  
  To add Required error message for a particular field.
