@@ -26,13 +26,10 @@ $(document).ready(function(){
 ##Data attributes
 
  * **data-ajax="true"**
- 
- *Example :*
-```HTML
-<form action="" id="" data-ajax="true">
- ```
- 
- Form ajax submission
+   Form ajax submission
+   ```HTML
+   <form action="" id="" data-ajax="true">
+   ```
  * **data-sfv-required="yes"**
  
  To make the field mandatory.
