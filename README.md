@@ -26,7 +26,9 @@ $(document).ready(function(){
 ##Data attributes
 
  * **data-ajax="true"**
+   
    Form ajax submission
+   
    ```HTML
    <form action="" id="" data-ajax="true">
    ```
