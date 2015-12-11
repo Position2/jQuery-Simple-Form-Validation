@@ -6,27 +6,33 @@
                          "errorMsgClass"     : "errormsg",
                          "errorMsg"          : "Required Field",
                          "otherErrorMsg"     :  {
-                                                    "email"         : "Please enter valid email",
-                                                    "companyemail"  : "Please enter company email",
-                                                    "alphabet"      : "Please enter letters only",
-                                                    "number"        : "Please enter numbers only",
-                                                    "alphanumeric"  : "Please don't enter any special character or space",
-                                                    "compare"       : "Please enter the same value again"
+                                                    "email"                     : "Please enter valid email",
+                                                    "companyemail"              : "Please enter company email",
+                                                    "alphabet"                  : "Please enter letters only",
+                                                    "alphabetwithspace"         : "Please enter letters & space only",
+                                                    "number"                    : "Please enter numbers only",
+                                                    "numberwithspace"           : "Please enter numbers & space only",
+                                                    "alphanumeric"              : "Please don't enter any special character or space",
+                                                    "alphanumericwithspace"     : "Please don't enter any special character",
+                                                    "compare"                   : "Please enter the same value again"
                                                 },
                          "beforeSubmit"        : ""
                       }, opts);
         return this.each(function() {
-            var curForm         = $(this),
-                curFormAjax     = curForm.attr("data-ajax") || false,
-                valChRaElems    = $("input[data-sfv-required='yes'][type='checkbox'],input[data-sfv-required='yes'][type='radio']",curForm),
-                valElems        = $("input[data-sfv-required='yes'],input[data-sfv-validation]:not(input[data-sfv-required='yes']),input[data-sfv-regex]:not(input[data-sfv-required='yes']),input[data-sfv-compare]:not(input[data-sfv-required='yes']),select[data-sfv-required='yes'],textarea[data-sfv-required='yes']",curForm).not(valChRaElems),
-                cmpElem         = $("input[data-sfv-compare]",curForm),
-                emailReg        = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/,
-                ComEmailReg     = /^([\w+\-\.]+@(?!gmail.com)(?!hotmail.com)(?!live.com)(?!outlook.com)(?!yahoo.com)(?!ymail.com)(?!rocketmail.com)(?!aol.com)(?!mac.comme.com)(?!icloud.com)(?!inbox.com)(?!sina.com)(?!qq.com)(?!foxmail.com)(?!163.com)(?!126.com)(?!189.cn 263.net)(?!yeah.net)(?!gmx.com)(?!gmx.net)(?!mail.com)(?!mail.ru)(?!rambler.ru)(?!lenta.ru)(?!autorambler.ru)(?!myrambler.ru)(?!ro.ru)(?!yandex.ru)(?!zoho.com)(?!msn.com)(?!webtown.com)(?!rediffmail.com)([\w\-]+\.)+[\w\-]{2,4})?$/,
-                alphaReg        = /^[A-Za-z]+$/,
-                numericReg      = /^[0-9]+$/,
-                alphanumericReg = /^[0-9a-zA-Z]+$/,
-                errorElem       = $("<"+options.errorMsgTag+"/>",{
+            var curForm             = $(this),
+                curFormAjax         = curForm.attr("data-sfv-ajax") || false,
+                valChRaElems        = $("input[data-sfv-required='yes'][type='checkbox'],input[data-sfv-required='yes'][type='radio']",curForm),
+                valElems            = $("input[data-sfv-required='yes'],input[data-sfv-validation]:not(input[data-sfv-required='yes']),input[data-sfv-regex]:not(input[data-sfv-required='yes']),input[data-sfv-compare]:not(input[data-sfv-required='yes']),select[data-sfv-required='yes'],textarea[data-sfv-required='yes']",curForm).not(valChRaElems),
+                cmpElem             = $("input[data-sfv-compare]",curForm),
+                emailReg            = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/,
+                ComEmailReg         = /^([\w+\-\.]+@(?!gmail.com)(?!hotmail.com)(?!live.com)(?!outlook.com)(?!yahoo.com)(?!ymail.com)(?!rocketmail.com)(?!aol.com)(?!mac.comme.com)(?!icloud.com)(?!inbox.com)(?!sina.com)(?!qq.com)(?!foxmail.com)(?!163.com)(?!126.com)(?!189.cn 263.net)(?!yeah.net)(?!gmx.com)(?!gmx.net)(?!mail.com)(?!mail.ru)(?!rambler.ru)(?!lenta.ru)(?!autorambler.ru)(?!myrambler.ru)(?!ro.ru)(?!yandex.ru)(?!zoho.com)(?!msn.com)(?!webtown.com)(?!rediffmail.com)([\w\-]+\.)+[\w\-]{2,4})?$/,
+                alphaReg            = /^[A-Za-z]+$/,
+                numericReg          = /^[0-9]+$/,
+                alphanumericReg     = /^[0-9a-zA-Z]+$/,
+                alphaWSReg          = /^[A-Za-z ]+$/,
+                numericWSReg        = /^[0-9 ]+$/,
+                alphanumericWSReg   = /^[0-9a-zA-Z ]+$/,
+                errorElem           = $("<"+options.errorMsgTag+"/>",{
                                       "class" : options.errorMsgClass
                                   });
             if(cmpElem.size() > 0) {
@@ -77,10 +83,16 @@
                         (!emailReg.test(disVal)) ? addErrorMsg(dis,disPatErrorMsg || options.otherErrorMsg.email) : removeErrorMsg(dis); 
                     } else if(dis.attr("data-sfv-validation") == "alpha") {
                         (!alphaReg.test(disVal)) ? addErrorMsg(dis,disPatErrorMsg || options.otherErrorMsg.alphabet) : removeErrorMsg(dis); 
+                    }  else if(dis.attr("data-sfv-validation") == "alphawithspace") {
+                        (!alphaWSReg.test(disVal)) ? addErrorMsg(dis,disPatErrorMsg || options.otherErrorMsg.alphabetwithspace) : removeErrorMsg(dis); 
                     } else if(dis.attr("data-sfv-validation") == "number") {
                         (!numericReg.test(disVal)) ? addErrorMsg(dis,disPatErrorMsg || options.otherErrorMsg.number) : removeErrorMsg(dis); 
+                    }  else if(dis.attr("data-sfv-validation") == "numberwithspace") {
+                        (!numericWSReg.test(disVal)) ? addErrorMsg(dis,disPatErrorMsg || options.otherErrorMsg.numberwithspace) : removeErrorMsg(dis); 
                     } else if(dis.attr("data-sfv-validation") == "alphanumeric") {
                         (!alphanumericReg.test(disVal)) ? addErrorMsg(dis,disPatErrorMsg || options.otherErrorMsg.alphanumeric) : removeErrorMsg(dis); 
+                    }  else if(dis.attr("data-sfv-validation") == "alphanumericwithspace") {
+                        (!alphanumericWSReg.test(disVal)) ? addErrorMsg(dis,disPatErrorMsg || options.otherErrorMsg.alphanumericwithspace) : removeErrorMsg(dis); 
                     } else if(disPattern != "" &&  typeof(disPattern) != "undefined") {
                         disPattern = new RegExp("^" + disPattern + "$");
                         (!disPattern.test(disVal)) ? addErrorMsg(dis,disPatErrorMsg || options.errorMsg) : removeErrorMsg(dis); 
