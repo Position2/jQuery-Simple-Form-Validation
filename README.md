@@ -43,7 +43,7 @@ $(document).ready(function(){
   * data-sfv-validation="**alphanumeric**" : To validate alphanumeric (*eg : abc123*)
  * **data-sfv-compare**
  
- To compare two field.eg. Password and confirm password fields
+ To compare two fields.eg. Password and confirm password fields
  
  *Example :  data-sfv-compare="#fieldtocompare"*
  * **data-sfv-require-errorMsg**
