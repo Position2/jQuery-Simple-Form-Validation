@@ -1,0 +1,48 @@
+{
+    "name": "jQuery Simple Form Validation",
+    "title": "jQuery Simple Form Validation",
+    "description": "A Simple jQuery Plugin for Form Validation.SimpleValidation is a simplified jquery plugin to achieve client side form validation.",
+    "keywords": [
+        "jQuery",
+        "plugin",
+        "form",
+        "validation",
+        "validator",
+        "validate",
+        "input",
+        "html5",
+        "data",
+        "field",
+        "pattern",
+        "custom",
+        "custompattern",
+        "ajax",
+        "required",
+        "conditional"
+    ],
+    "version": "1.0.0",
+    "author": {
+        "name": "Position2",
+        "url": "http://www.position2.com"
+    },
+    "maintainers": [
+        {
+            "name": "Position2",
+            "email": "p2webadmin@position2.com",
+            "url": "http://www.position2.com"
+        }
+    ],
+    "licenses": [
+        {
+            "type": "MIT",
+            "url": "http://opensource.org/licenses/MIT"
+        }
+    ],
+    "bugs": "https://github.com/Position2/jQuery-Simple-Form-Validation/issues",
+    "homepage": "https://github.com/Position2/jQuery-Simple-Form-Validation",
+    "docs": "https://github.com/Position2/jQuery-Simple-Form-Validation",
+    "download": "https://github.com/Position2/jQuery-Simple-Form-Validation/archive/master.zip",
+    "dependencies": {
+        "jquery": ">=1.7"
+    }
+}
