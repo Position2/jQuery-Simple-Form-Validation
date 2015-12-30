@@ -32,17 +32,17 @@
             "url": "http://www.position2.com"
         }
     ],
-    "licenses": [
-        {
-            "type": "MIT",
-            "url": "http://opensource.org/licenses/MIT"
-        }
-    ],
-    "bugs": "https://github.com/Position2/jQuery-Simple-Form-Validation/issues",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/Position2/jQuery-Simple-Form-Validation/issues",
+        "email": "p2webadmin@position2.com"
+    },
     "homepage": "https://github.com/Position2/jQuery-Simple-Form-Validation",
-    "docs": "https://github.com/Position2/jQuery-Simple-Form-Validation",
-    "download": "https://github.com/Position2/jQuery-Simple-Form-Validation/archive/master.zip",
     "dependencies": {
-        "jquery": ">=1.7"
+        "jquery": ">=1.8"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git@github.com:Position2/jQuery-Simple-Form-Validation.git"
     }
 }
