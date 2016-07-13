@@ -98,7 +98,7 @@
                         (!disPattern.test(disVal)) ? addErrorMsg(dis,disPatErrorMsg || options.errorMsg) : removeErrorMsg(dis); 
                     } else if(disCompare != "" &&  typeof(disCompare) != "undefined" && disCompareElem.size() > 0 && disCompareVal != "") {
                         (disVal != disCompareVal) ? addErrorMsg(disCompareElem,disPatErrorMsg || options.otherErrorMsg.compare) : removeErrorMsg(disCompareElem); 
-                    } else if(compareElemW.attr("id") == dis.attr("id")) {
+                    } else if(compareElemW.attr("id") == dis.attr("id") && typeof(compareElemW.attr("id")) != "undefined") {
                         (disVal != compareElem.val()) ? addErrorMsg(dis,disPatErrorMsg || options.otherErrorMsg.compare) : removeErrorMsg(dis); 
                     } else {
                         removeErrorMsg(dis);
@@ -123,7 +123,7 @@
                     var disType = $(this).attr("type");
                     (disType == "checkbox" || disType == "radio") ? validateChRb(this) : validate(this);
                 });
-                if($("."+options.errorFieldClass+",."+options.errorMsgClass,$(this)).size() <= 0) {
+                if($("."+options.errorFieldClass+":visible,."+options.errorMsgClass+":visible",$(this)).size() <= 0) {
                     if(curFormAjax) {
                         if (typeof options.beforeSubmit == 'function') {
                             options.beforeSubmit.call(this,disForm);
