@@ -49,7 +49,7 @@ $(document).ready(function(){
  To compare two fields.eg. Password and confirm password fields
  
  *Example :  data-sfv-compare="#fieldtocompare"*
-  * **data-sfv-minlength**
+ * **data-sfv-minlength**
  
  To validate the field with minimum letters. If the same attribute declared in form, it will validate all fields with minimum letters.
  
