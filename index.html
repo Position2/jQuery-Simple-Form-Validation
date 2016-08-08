@@ -12,14 +12,14 @@
 
 <body>
     <div class="container">
-        <form class="form-horizontal validationdemoform" method="post" action="#" id="formsimplevalidation">
+        <form class="form-horizontal validationdemoform" method="post" action="#" data-sfv-minlength="4" id="formsimplevalidation">
             <div class="form-group">
                 <label for="inputFirstname" class="control-label">Firstname <abbr title="required">*</abbr></label>
-                <input type="text" data-sfv-required="yes" class="form-control" id="inputfirstname">
+                <input type="text" data-sfv-required="yes" class="form-control" data-sfv-minlength="3" id="inputfirstname">
             </div>
             <div class="form-group">
                 <label for="inputLastname" class="control-label">Lastname <abbr title="required">*</abbr></label>
-                <input type="text" data-sfv-required="yes" class="form-control" id="inputlastname">
+                <input type="text" data-sfv-required="yes" class="form-control" data-sfv-minlength="1" id="inputlastname">
             </div>
             <div class="form-group">
                 <label for="inputEmail" class="control-label">Email <abbr title="required">*</abbr></label>
@@ -27,11 +27,11 @@
             </div>
             <div class="form-group">
                 <label for="inputPhone" class="control-label">Phone <abbr title="required">*</abbr></label>
-                <input type="text" data-sfv-required="yes" class="form-control" id="inputphone">
+                <input type="text" data-sfv-required="yes" class="form-control" data-sfv-minlength="10" id="inputphone">
             </div>
             <div class="form-group">
                 <label for="inputStreet" class="control-label">Street <abbr title="required">*</abbr></label>
-                <input type="text" data-sfv-required="yes" class="form-control" id="inputstreet">
+                <input type="text" data-sfv-required="yes" class="form-control" data-sfv-minlength="null" id="inputstreet">
             </div>
             <div class="form-group">
                 <label for="inputCity" class="control-label">City <abbr title="required">*</abbr></label>

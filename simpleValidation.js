@@ -14,15 +14,17 @@
                                                     "numberwithspace"           : "Please enter numbers & space only",
                                                     "alphanumeric"              : "Please don't enter any special character or space",
                                                     "alphanumericwithspace"     : "Please don't enter any special character",
-                                                    "compare"                   : "Please enter the same value again"
+                                                    "compare"                   : "Please enter the same value again",
+                                                    "minlength"                 : "Please enter minimum {n} letters"
                                                 },
                          "beforeSubmit"        : ""
                       }, opts);
         return this.each(function() {
             var curForm             = $(this),
                 curFormAjax         = curForm.attr("data-sfv-ajax") || false,
+                curFormMinL         = curForm.attr("data-sfv-minlength") || 0,
                 valChRaElems        = $("input[data-sfv-required='yes'][type='checkbox'],input[data-sfv-required='yes'][type='radio']",curForm),
-                valElems            = $("input[data-sfv-required='yes'],input[data-sfv-validation]:not(input[data-sfv-required='yes']),input[data-sfv-regex]:not(input[data-sfv-required='yes']),input[data-sfv-compare]:not(input[data-sfv-required='yes']),select[data-sfv-required='yes'],textarea[data-sfv-required='yes']",curForm).not(valChRaElems),
+                valElems            = $("input[data-sfv-required='yes'],input[data-sfv-validation]:not(input[data-sfv-required='yes']),input[data-sfv-regex]:not(input[data-sfv-required='yes']),input[data-sfv-compare]:not(input[data-sfv-required='yes']),input[data-sfv-minlength]:not(input[data-sfv-required='yes']),select[data-sfv-required='yes'],textarea[data-sfv-required='yes']",curForm).not(valChRaElems),
                 cmpElem             = $("input[data-sfv-compare]",curForm),
                 emailReg            = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/,
                 ComEmailReg         = /^([\w+\-\.]+@(?!gmail.com)(?!hotmail.com)(?!live.com)(?!outlook.com)(?!yahoo.com)(?!ymail.com)(?!rocketmail.com)(?!aol.com)(?!mac.comme.com)(?!icloud.com)(?!inbox.com)(?!sina.com)(?!qq.com)(?!foxmail.com)(?!163.com)(?!126.com)(?!189.cn 263.net)(?!yeah.net)(?!gmx.com)(?!gmx.net)(?!mail.com)(?!mail.ru)(?!rambler.ru)(?!lenta.ru)(?!autorambler.ru)(?!myrambler.ru)(?!ro.ru)(?!yandex.ru)(?!zoho.com)(?!msn.com)(?!webtown.com)(?!rediffmail.com)([\w\-]+\.)+[\w\-]{2,4})?$/,
@@ -62,6 +64,7 @@
                     disVal          = dis.val().trim(),
                     disName         = dis.attr("name"),
                     disRequ         = dis.attr("data-sfv-required"),
+                    disMinL         = dis.attr("data-sfv-minlength") || 0,
                     disPattern      = dis.attr("data-sfv-regex"),
                     disCompare      = dis.attr("data-sfv-compare"),
                     disCompareElem  = $(disCompare),
@@ -100,6 +103,16 @@
                         (disVal != disCompareVal) ? addErrorMsg(disCompareElem,disPatErrorMsg || options.otherErrorMsg.compare) : removeErrorMsg(disCompareElem); 
                     } else if(compareElemW.attr("id") == dis.attr("id") && typeof(compareElemW.attr("id")) != "undefined") {
                         (disVal != compareElem.val()) ? addErrorMsg(dis,disPatErrorMsg || options.otherErrorMsg.compare) : removeErrorMsg(dis); 
+                    } else if(disMinL > 0 || curFormMinL > 0) { 
+                        if(disMinL > 0 && disVal.length < disMinL) {
+                            var MLerrorMsg = (disPatErrorMsg || options.otherErrorMsg.minlength).replace("{n}", disMinL);
+                            addErrorMsg(dis,MLerrorMsg);
+                        } else if(disMinL <= 0 && curFormMinL.length > 0 && disVal.length < curFormMinL) {
+                            var MLerrorMsg = (disPatErrorMsg || options.otherErrorMsg.minlength).replace("{n}", curFormMinL);
+                            addErrorMsg(dis,MLerrorMsg);
+                        } else {
+                            removeErrorMsg(dis);
+                        }
                     } else {
                         removeErrorMsg(dis);
                     }
