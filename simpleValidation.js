@@ -1,3 +1,8 @@
+/*
+Simple validation form 
+position2.com
+https://github.com/Position2/jQuery-Simple-Form-Validation 
+*/
 (function($) {
     $.fn.simpleValidation = function(opts, callback) {
         var options = $.extend({ 
@@ -19,6 +24,10 @@
                                                 },
                          "beforeSubmit"        : ""
                       }, opts);
+        // remove errormsg on click
+        $("body").on("click",options.errorMsgTag+"."+options.errorMsgClass,function() {
+            $(this).fadeOut();
+        });
         return this.each(function() {
             var curForm             = $(this),
                 curFormAjax         = curForm.attr("data-sfv-ajax") || false,
