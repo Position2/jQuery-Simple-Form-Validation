@@ -25,7 +25,9 @@ https://github.com/Position2/jQuery-Simple-Form-Validation
                       }, opts);
         // remove errormsg on click
         $("body").on("click",options.errorMsgTag+"."+options.errorMsgClass,function() {
-            $(this).fadeOut();
+            $(this).fadeOut(function() {
+                $(this).remove();
+            });
         });
         return this.each(function() {
             var curForm             = $(this),
