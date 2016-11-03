@@ -1,6 +1,5 @@
 /*
-Simple validation form 
-position2.com
+Simple form validation
 https://github.com/Position2/jQuery-Simple-Form-Validation 
 */
 (function($) {
