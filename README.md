@@ -139,14 +139,13 @@ $("#formid").simpleValidation({
  *Example :*
  ```javascript
  $("#formid").simpleValidation({
-      //options...
-     },function(data,form) {
-       //data - ajax value return
-       //form - current form
-       if(data == "succcess") {
-        form.removeClass("loader")
-       }
-     }
+   //options...
+ },function(data,form) {
+	//data - ajax value return
+	//form - current form
+	if(data == "succcess") {
+		form.removeClass("loader")
+	}
 });
  ```
 
