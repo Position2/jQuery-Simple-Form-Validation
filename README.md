@@ -14,7 +14,7 @@ Here the steps to configure...
 
 **Step 3 :** Add data attributes to the fields
 ```HTML
-	<input type="text" data-sfv-required="yes" class="form-control" id="inputfirstname">
+  <input type="text" data-sfv-required="yes" class="form-control" id="inputfirstname">
 ```
 **Step 4:** Fire the jQuery simpleValidation Plugin 
 ```javascript
@@ -35,7 +35,7 @@ $(document).ready(function(){
  * **data-sfv-required="yes"**
  
  To make the field mandatory.
-	
+  
  * **data-sfv-validation**
   * data-sfv-validation="**email**"  : To validate email (*eg : abc@sample.com*)
   * data-sfv-validation="**alpha**"  : To validate alphabetic (*eg : abcdef*)
@@ -141,11 +141,11 @@ $("#formid").simpleValidation({
  $("#formid").simpleValidation({
    //options...
  },function(data,form) {
-	//data - ajax value return
-	//form - current form
-	if(data == "succcess") {
-		form.removeClass("loader")
-	}
+  //data - ajax value return
+  //form - current form
+  if(data == "succcess") {
+    form.removeClass("loader")
+  }
 });
  ```
 
@@ -164,4 +164,4 @@ $("#formid").simpleValidation({
    color: #ff0000;
 }
 ```
-	
+  
