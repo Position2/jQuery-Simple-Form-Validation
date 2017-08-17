@@ -39,7 +39,7 @@ $(document).ready(function(){
   * data-sfv-validation="**number**" : To validate number (*eg : 12345*)
   * data-sfv-validation="**numberwithspace**" : To validate number with space (*eg : 123 45*)
   * data-sfv-validation="**alphanumeric**" : To validate alphanumeric (*eg : abc123*)
-    * data-sfv-validation="**alphanumericwithspace**" : To validate alphanumeric with space (*eg : abc 123*)
+  * data-sfv-validation="**alphanumericwithspace**" : To validate alphanumeric with space (*eg : abc 123*)
  
  * **data-sfv-compare :**<br/>_To compare two fields. eg. Password and confirm password fields_ <br/>Example :  data-sfv-compare="#fieldtocompare"
   
