@@ -25,54 +25,31 @@ $(document).ready(function(){
 
 ## Data attributes
 
- * **data-sfv-ajax="true"**
-   
-  Form ajax submission
+* **data-sfv-ajax="true"** : _Form ajax submission_
    
    ```HTML
    <form action="" id="" data-sfv-ajax="true">
    ```
- * **data-sfv-required="yes"**
- 
-  To make the field mandatory.
-  
- * **data-sfv-validation**
+* **data-sfv-required="yes"** : To make the field mandatory.
+
+* **data-sfv-validation :**
   * data-sfv-validation="**email**"  : To validate email (*eg : abc@sample.com*)
   * data-sfv-validation="**alpha**"  : To validate alphabetic (*eg : abcdef*)
   * data-sfv-validation="**alphawithspace**"  : To validate alphabetic with space (*eg : abc def*)
   * data-sfv-validation="**number**" : To validate number (*eg : 12345*)
   * data-sfv-validation="**numberwithspace**" : To validate number with space (*eg : 123 45*)
   * data-sfv-validation="**alphanumeric**" : To validate alphanumeric (*eg : abc123*)
-  * data-sfv-validation="**alphanumericwithspace**" : To validate alphanumeric with space (*eg : abc 123*)
+    * data-sfv-validation="**alphanumericwithspace**" : To validate alphanumeric with space (*eg : abc 123*)
  
- * **data-sfv-compare**
+ * **data-sfv-compare :**<br/>_To compare two fields. eg. Password and confirm password fields_ <br/>Example :  data-sfv-compare="#fieldtocompare"
+  
+ * **data-sfv-minlength**<br/>_To validate the field with minimum letters. If the same attribute declared in form, it will validate all fields with minimum letters._<br/>Example :  data-sfv-minlength="4"
  
- To compare two fields.eg. Password and confirm password fields
+ * **data-sfv-require-errorMsg**<br/>_To add Required error message for a particular field._<br/>Example :  data-sfv-require-errorMsg="Please Enter First Name"
+
+ * **data-sfv-regex**<br/>_To validate particular field by your own regular expression._<br/>Example : data-sfv-regEx="[\+]\d{2}[\(]\d{2}[\)]\d{4}[\-]\d{4}"
  
- *Example :  data-sfv-compare="#fieldtocompare"*
- * **data-sfv-minlength**
- 
- To validate the field with minimum letters. If the same attribute declared in form, it will validate all fields with minimum letters.
- 
- *Example :  data-sfv-minlength="4"*
- * **data-sfv-require-errorMsg**
- 
- To add Required error message for a particular field.
- 
- *Example :  data-sfv-require-errorMsg="Please Enter First Name"*
- * **data-sfv-regex**
- 
- To validate particular field by your own regular expression.
- 
- *Example : data-sfv-regEx="[\+]\d{2}[\(]\d{2}[\)]\d{4}[\-]\d{4}"*
- 
- * **data-sfv-regEx-errorMsg**
- 
- To add Regular expression mismatch error message for a particular field.
- 
- *Example 1: data-sfv-regEx-errorMsg="Please enter valid phone number ex:+99(99)9999-9999"*
- 
- *Example 2 (for email,alpha,number,alphanumeric) : data-sfv-regEx-errorMsg="Please enter valid email Id(or)Please enter only number(or)text(or)alpanumeric"*
+ * **data-sfv-regEx-errorMsg**<br/>_To add Regular expression mismatch error message for a particular field._<br/>Example 1: data-sfv-regEx-errorMsg="Please enter valid phone number ex:+99(99)9999-9999"<br/>Example 2 (for email,alpha,number,alphanumeric) : data-sfv-regEx-errorMsg="Please enter valid email Id(or)Please enter only number(or)text(or)alpanumeric"
 
 ## Plugin Options
 *  **errorFieldClass**
@@ -165,4 +142,3 @@ $("#formid").simpleValidation({
    color: #ff0000;
 }
 ```
-  
