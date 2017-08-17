@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>jQuery Simple Form Validation</title>
+  <link rel="stylesheet" href="bootstrap.min.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="jquery-1.11.2.min.js"></script>
+  <script src="../dist/simpleValidation.min.js"></script>
+</head>
+<body>
+  <div class="container">
+    <form class="form-horizontal validationdemoform" method="post" action="#" data-sfv-minlength="2" id="formsimplevalidation">
+      <div class="form-group">
+        <label for="inputFirstname" class="control-label">Firstname
+          <abbr title="required">*</abbr>
+        </label>
+        <input type="text" data-sfv-required="yes" class="form-control" data-sfv-minlength="3" id="inputfirstname">
+      </div>
+      <div class="form-group">
+        <label for="inputLastname" class="control-label">Lastname
+          <abbr title="required">*</abbr>
+        </label>
+        <input type="text" data-sfv-required="yes" class="form-control" data-sfv-minlength="1" id="inputlastname">
+      </div>
+      <div class="form-group">
+        <label for="inputEmail" class="control-label">Email
+          <abbr title="required">*</abbr>
+        </label>
+        <input type="email" data-sfv-required="yes" class="form-control" id="inputemail">
+      </div>
+      <div class="form-group">
+        <label for="inputPhone" class="control-label">Phone
+          <abbr title="required">*</abbr>
+        </label>
+        <input type="text" data-sfv-required="yes" class="form-control" data-sfv-regEx="[+]\d{2}[(]\d{2}[)]\d{4}[-]\d{4}" data-sfv-regEx-errorMsg="Please enter valid Phone no" placeholder="+99(99)9999-9999" id="inputphone">
+      </div>
+      <div class="form-group">
+        <label for="inputStreet" class="control-label">Street
+          <abbr title="required">*</abbr>
+        </label>
+        <input type="text" data-sfv-required="yes" class="form-control" data-sfv-minlength="null" id="inputstreet">
+      </div>
+      <div class="form-group">
+        <label for="inputCity" class="control-label">City
+          <abbr title="required">*</abbr>
+        </label>
+        <input type="text" data-sfv-required="yes" class="form-control" id="inputcity">
+      </div>
+      <div class="form-group">
+        <label for="inputCountry" data-sfv-required="yes" class="control-label">Country
+          <abbr title="required">*</abbr>
+        </label>
+        <select name="" data-sfv-required="yes" class="form-control" id="inputcountry">
+          <option value="">Select Country</option>
+          <option value="US">United States</option>
+          <option value="IN">India</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="inputWebsite" class="control-label">Website</label>
+        <input type="text" class="form-control" id="inputwebsite">
+      </div>
+      <div class="form-group gender">
+        <label class="control-label">Sex
+          <abbr title="required">*</abbr>
+        </label>
+        <div class="radio">
+          <label>
+            <input type="radio" data-sfv-required="yes" name="gender" id="optionsRadios1" value="Male"> Male
+          </label>
+        </div>
+        <div class="radio">
+          <label>
+            <input type="radio" data-sfv-required="yes" name="gender" id="optionsRadios2" value="Female"> Female
+          </label>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-xs-offset-2 col-xs-10">
+          <div class="checkbox terms_cond">
+            <input type="checkbox" name="t&c" id="t&c" data-sfv-required="yes" data-sfv-require-errorMsg="Please accept terms & condition">
+            <label for="t&c">
+              <abbr title="required">*</abbr> I accept the Terms and Conditions</label>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-xs-offset-2 col-xs-10">
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <script>
+  $(document).ready(function() {
+    $("#formsimplevalidation").simpleValidation();
+  })
+  </script>
+</body>
+
+</html>

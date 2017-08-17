@@ -1,20 +1,20 @@
 .validationdemoform {
 	background: none repeat scroll 0 0 #fff;
-    border-radius: 5px;
-    margin: 100px auto;
-    max-width: 400px;
+  border-radius: 5px;
+  margin: 100px auto;
+  max-width: 400px;
 }
 .validationdemoform .form-control {
 	background: none repeat scroll 0 0 #eaeaec;
-    border: 1px solid #eaeaec;
-    border-radius: 5px;
-    box-shadow: none;
-    font-size: 12px;
+  border: 1px solid #eaeaec;
+  border-radius: 5px;
+  box-shadow: none;
+  font-size: 12px;
 }
 .validationdemoform .form-control.error {
 	background-color:#f2dede;
-    border-color: #a94442;
-    color:#a94442;
+  border-color: #a94442;
+  color:#a94442;
 }
 .validationdemoform .control-label {
 	padding : 5px 0px;
