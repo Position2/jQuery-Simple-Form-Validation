@@ -23,7 +23,7 @@ $(document).ready(function(){
 });
 ```
 
-##Data attributes
+## Data attributes
 
  * **data-sfv-ajax="true"**
    
@@ -116,7 +116,7 @@ $("#formid").simpleValidation({
 });
  ```
  
-##Callbacks(if the form is ajax submit)
+## Callbacks(if the form is ajax submit)
 *  **beforeSubmit**
   
   Executes before the form submit
@@ -149,7 +149,7 @@ $("#formid").simpleValidation({
 });
  ```
 
-##Style error message and field
+## Style error message and field
 
 ```css
 //Styling error field
