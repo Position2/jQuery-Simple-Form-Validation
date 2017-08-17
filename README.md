@@ -14,7 +14,7 @@ Here the steps to configure...
 
 **Step 3 :** Add data attributes to the fields
 ```HTML
-  <input type="text" data-sfv-required="yes" class="form-control" id="inputfirstname">
+<input type="text" data-sfv-required="yes" class="form-control" id="inputfirstname">
 ```
 **Step 4:** Fire the jQuery simpleValidation Plugin 
 ```javascript
@@ -73,7 +73,7 @@ $(document).ready(function(){
  
  *Example 2 (for email,alpha,number,alphanumeric) : data-sfv-regEx-errorMsg="Please enter valid email Id(or)Please enter only number(or)text(or)alpanumeric"*
 
-##Plugin Options
+## Plugin Options
 *  **errorFieldClass**
 
  To change the error field class (Default : error)
