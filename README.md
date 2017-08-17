@@ -27,14 +27,14 @@ $(document).ready(function(){
 
  * **data-sfv-ajax="true"**
    
-   Form ajax submission
+  Form ajax submission
    
    ```HTML
    <form action="" id="" data-sfv-ajax="true">
    ```
  * **data-sfv-required="yes"**
  
- To make the field mandatory.
+  To make the field mandatory.
   
  * **data-sfv-validation**
   * data-sfv-validation="**email**"  : To validate email (*eg : abc@sample.com*)
@@ -44,6 +44,7 @@ $(document).ready(function(){
   * data-sfv-validation="**numberwithspace**" : To validate number with space (*eg : 123 45*)
   * data-sfv-validation="**alphanumeric**" : To validate alphanumeric (*eg : abc123*)
   * data-sfv-validation="**alphanumericwithspace**" : To validate alphanumeric with space (*eg : abc 123*)
+ 
  * **data-sfv-compare**
  
  To compare two fields.eg. Password and confirm password fields
