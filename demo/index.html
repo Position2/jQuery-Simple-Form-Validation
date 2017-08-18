@@ -6,11 +6,17 @@
   <link rel="stylesheet" href="bootstrap.min.css">
   <link rel="stylesheet" href="style.css">
   <script src="jquery-1.11.2.min.js"></script>
-  <script src="../dist/simplevalidation.min.js"></script>
+  <script src="../dist/simpleValidation.min.js"></script>
 </head>
 <body>
+<header id="Header">
   <div class="container">
-    <form class="form-horizontal validationdemoform" method="post" action="" data-sfv-minlength="2" id="formsimplevalidation">
+    <img src="position2-logo.svg">
+  </div>
+</header>
+  <div class="container">
+    <h2>JQuery Simple Form Validation</h2>
+    <form class="form-horizontal validationdemoform" action="http://position2.github.io/jQuery-Simple-Form-Validation/demo/" data-sfv-minlength="2" id="formsimplevalidation">
       <div class="form-group">
         <label for="inputFirstname" class="control-label">Firstname
           <abbr title="required">*</abbr>
@@ -63,7 +69,7 @@
       </div>
       <div class="form-group gender">
         <label class="control-label">Sex
-          <abbr title="required">*</abbr>
+          <abbr title="required">*</abbr> :
         </label>
         <div class="radio">
           <label>
@@ -77,18 +83,14 @@
         </div>
       </div>
       <div class="form-group">
-        <div class="col-xs-offset-2 col-xs-10">
-          <div class="checkbox terms_cond">
-            <input type="checkbox" name="t&c" id="t&c" data-sfv-required="yes" data-sfv-require-errorMsg="Please accept terms & condition">
-            <label for="t&c">
-              <abbr title="required">*</abbr> I accept the Terms and Conditions</label>
-          </div>
+        <div class="checkbox terms_cond">
+          <input type="checkbox" name="t&c" id="t&c" data-sfv-required="yes" data-sfv-require-errorMsg="Please accept terms & condition">
+          <label for="t&c">
+            <abbr title="required">*</abbr> I accept the Terms and Conditions</label>
         </div>
       </div>
-      <div class="form-group">
-        <div class="col-xs-offset-2 col-xs-10">
+      <div class="form-group submit">
           <button type="submit" class="btn btn-primary">Submit</button>
-        </div>
       </div>
     </form>
   </div>

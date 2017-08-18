@@ -1,23 +1,54 @@
+#Header {
+  background-color: #e04138;
+  width: 100%;
+  margin-bottom: 40px;
+}
+#Header img {
+  padding: 12px 0;
+  width: 140px;
+}
+h2 {
+  color: #000;
+  margin: 0;
+  padding-top: 20px;
+  text-align: center;
+}
 .validationdemoform {
-	background: none repeat scroll 0 0 #fff;
+  background-color: #fff;
   border-radius: 5px;
-  margin: 100px auto;
-  max-width: 400px;
+  margin: 0px auto 80px;
+  padding: 50px;
+}
+.validationdemoform .form-group {
+  display: inline-block;
+  padding: 0 26px;
+  vertical-align: top;
+  width: 49%;
+  margin: 0 0 20px;
+  position: relative;
 }
 .validationdemoform .form-control {
-	background: none repeat scroll 0 0 #eaeaec;
-  border: 1px solid #eaeaec;
-  border-radius: 5px;
+  background-color: #fcfcfc;
+  border: 1px solid #d1d2d4;
+  border-radius: 0;
   box-shadow: none;
-  font-size: 12px;
+  font-size: 16px;
+  height: 42px;
+  padding: 10px;
+  font-weight: 300;
+}
+.validationdemoform .form-control  select {
+	outline: 0 none;
 }
 .validationdemoform .form-control.error {
-	background-color:#f2dede;
-  border-color: #a94442;
+  background-color:#d2d3d5;
+  border: none;
   color:#a94442;
 }
 .validationdemoform .control-label {
-	padding : 5px 0px;
+  font-size: 16px;
+  font-weight: 300;
+  padding: 0 0 6px;
 }
 .validationdemoform .checkbox label,.validationdemoform .radio label {
 	width: 100%;
@@ -27,18 +58,108 @@
 	color: #FF0000; 
 }
 .validationdemoform span.errormsg {
-	color: #ff0000;
-	display: inline-block;
-	text-align: right;
-	width: 100%;
+  bottom: 11px;
+  color: #ff0000;
+  display: inline-block;
+  position: absolute;
+  right: 45px;
+  text-align: right;
+}
+.validationdemoform .checkbox.terms_cond input, .validationdemoform .checkbox.terms_cond label {
+  display: inline-block;
+  margin: 0 2px 0 0;
+  position: static;
+  vertical-align: middle;
+  width: auto;
+  font-size: 18px;
+  font-weight: 300;
+}
+.validationdemoform .form-group.submit button {
+  border-radius: 0;
+  display: block;
+  margin: 0 auto;
+  padding: 10px;
+  width: 250px;
+  font-size: 18px;
+  text-transform: uppercase;
+  background-color: #e04138;
+  border: none;
+}
+.validationdemoform .form-group.submit {
+  width: 100%;
+  margin: 50px 0 0;
+}
+.validationdemoform .form-group.gender .radio {
+  display: inline-block;
+  margin-right: 12px;
+}
+.validationdemoform .form-group.gender .control-label {
+  margin-right: 10px;
 }
 .validationdemoform .terms_cond label {
 	padding: 0px;
 }
 .validationdemoform .terms_cond span.errormsg {
-	text-align: left;
-	padding-left: 10px;
+  bottom: -26px;
+  padding: 0;
+  right: 0;
+  text-align: left;
+  width: 100%;
 }
 .validationdemoform .gender span.errormsg {
-	text-align: left;
+  bottom: -22px;
+  right: 0;
+  width: 100px;
+}
+.validationdemoform .terms_cond .errormsg {
+  bottom: -26px;
+}
+/* ========================================
+   form Responsive Styles
+========================================= */
+@media (min-width: 0px) and (max-width: 767px) {
+  h2 {
+    font-size: 18px;
+  }
+  #Header {
+    margin-bottom: 20px;
+  }
+  #Header img {
+    width: 100px;
+  }
+  .validationdemoform {
+    margin: 30px 0px;
+    padding: 0 10px;
+  }
+  .validationdemoform .form-group {
+    padding: 0;
+    width: 100%;
+  }
+  .validationdemoform .checkbox.terms_cond label {
+    font-size: 14px;
+    width: 92%;
+  }
+  .validationdemoform .form-group.submit {
+    margin: 20px 0 0;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  h2 {
+    font-size: 20px;
+  }
+  #Header {
+    margin-bottom: 20px;
+  }
+  #Header img {
+    width: 110px;
+  }
+  .validationdemoform .checkbox.terms_cond label {
+    font-size: 14px;
+    width: 90%;
+  }
+  .validationdemoform {
+    margin-top: 20px;
+    padding: 35px;
+  }
 }
