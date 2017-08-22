@@ -56,7 +56,7 @@ $(document).ready(function(){
 
  To change the error field class (Default : error)
  
- *Example :*
+ *Example \:*
  ```javascript
 $("#formid").simpleValidation({
      "errorFieldClass" : "invalidfield"
@@ -66,7 +66,7 @@ $("#formid").simpleValidation({
 
  To change the error message field tag (Default : span)
  
- *Example :*
+ *Example \:*
  ```javascript
 //If you want to show the error message in "div" tag...
 $("#formid").simpleValidation({
