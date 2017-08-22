@@ -77,7 +77,7 @@ $("#formid").simpleValidation({
 
  To change the error message field class (Default : errormsg)
  
- *Example :*
+ *Example \:*
  ```javascript
  $("#formid").simpleValidation({
      "errorMsgClass" : "errorMsg",
@@ -87,7 +87,7 @@ $("#formid").simpleValidation({
 
  To change the error message (Default : Required Field)
  
- *Example :*
+ *Example \:*
  ```javascript
  $("#formid").simpleValidation({
      "errorMsg" : "Required Field",
@@ -99,7 +99,7 @@ $("#formid").simpleValidation({
   
   Executes before the form submit
 
- *Example :*
+ *Example \:*
  ```javascript
  $("#formid").simpleValidation({
      "beforeSubmit" : function(form) {
@@ -114,7 +114,7 @@ $("#formid").simpleValidation({
   
   Executes immediately after the form is submitted
 
- *Example :*
+ *Example \:*
  ```javascript
  $("#formid").simpleValidation({
    //options...
