@@ -8,15 +8,15 @@ It provides a consolidated validation for all types of forms with lesser lines o
 
 Here the steps to configure...
 
-**Step 1 :** Download and link to the Jquery plugin
+**Step 1 \:** Download and link to the Jquery plugin
 
-**Step 2 :** Download and link to the Jquery simpleValidation plugin
+**Step 2 \:** Download and link to the Jquery simpleValidation plugin
 
-**Step 3 :** Add data attributes to the fields
+**Step 3 \:** Add data attributes to the fields
 ```HTML
 <input type="text" data-sfv-required="yes" class="form-control" id="inputfirstname">
 ```
-**Step 4:** Fire the jQuery simpleValidation Plugin 
+**Step 4 \:** Fire the jQuery simpleValidation Plugin 
 ```javascript
 $(document).ready(function(){
    $("#formid").simpleValidation();
