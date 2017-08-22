@@ -41,7 +41,7 @@ $(document).ready(function(){
   * data-sfv-validation="**alphanumeric**" : To validate alphanumeric (*eg : abc123*)
   * data-sfv-validation="**alphanumericwithspace**" : To validate alphanumeric with space (*eg : abc 123*)
  
- * **data-sfv-compare :**<br/>_To compare two fields. eg. Password and confirm password fields_ <br/>Example :  data-sfv-compare="#fieldtocompare"
+ * **data-sfv-compare \:**<br/>_To compare two fields. eg. Password and confirm password fields_ <br/>Example :  data-sfv-compare="#fieldtocompare"
   
  * **data-sfv-minlength**<br/>_To validate the field with minimum letters. If the same attribute declared in form, it will validate all fields with minimum letters._<br/>Example :  data-sfv-minlength="4"
  
