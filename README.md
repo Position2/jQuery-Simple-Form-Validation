@@ -32,7 +32,7 @@ $(document).ready(function(){
    ```
 * **data-sfv-required="yes"** : To make the field mandatory.
 
-* **data-sfv-validation :**
+* **data-sfv-validation \:**
   * data-sfv-validation="**email**"  : To validate email (*eg : abc@sample.com*)
   * data-sfv-validation="**alpha**"  : To validate alphabetic (*eg : abcdef*)
   * data-sfv-validation="**alphawithspace**"  : To validate alphabetic with space (*eg : abc def*)
