@@ -97,7 +97,11 @@
   </div>
   <script>
   $(document).ready(function() {
-    $("#formsimplevalidation").simpleValidation();
+    $("#formsimplevalidation").simpleValidation({
+      beforeSubmit : function() {
+        console.log("asdasdasd")
+      }
+    });
   })
   </script>
 </body>

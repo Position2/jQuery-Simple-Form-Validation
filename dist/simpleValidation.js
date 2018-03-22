@@ -149,10 +149,10 @@
           (disType == "checkbox" || disType == "radio") ? validateChRb(this): validate(this);
         });
         if ($("." + options.errorFieldClass + ":visible,." + options.errorMsgClass + ":visible", $(this)).size() <= 0) {
+          if (typeof options.beforeSubmit == 'function') {
+            options.beforeSubmit.call(this, disForm);
+          }
           if (curFormAjax) {
-            if (typeof options.beforeSubmit == 'function') {
-              options.beforeSubmit.call(this, disForm);
-            }
             $.ajax({
               type: curForm.attr("method"),
               url: curForm.attr("action"),
