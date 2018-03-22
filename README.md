@@ -94,7 +94,7 @@ $("#formid").simpleValidation({
 });
  ```
  
-## Callbacks(if the form is ajax submit)
+## Callbacks
 *  **beforeSubmit**
   
   Executes before the form submit
@@ -110,7 +110,7 @@ $("#formid").simpleValidation({
 });
  ```
  
-*  **After Submit**
+*  **After Submit (if the form is ajax submit) **
   
   Executes immediately after the form is submitted
 
