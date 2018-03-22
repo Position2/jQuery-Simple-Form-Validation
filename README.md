@@ -110,7 +110,7 @@ $("#formid").simpleValidation({
 });
  ```
  
-*  **After Submit (if the form is ajax submit) **
+*  **After Submit (if the form is ajax submit)**
   
   Executes immediately after the form is submitted
 
