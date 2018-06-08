@@ -150,7 +150,7 @@
         });
         if ($("." + options.errorFieldClass + ":visible,." + options.errorMsgClass + ":visible", $(this)).size() <= 0) {
           if (typeof options.beforeSubmit == 'function') {
-            options.beforeSubmit.call(this, disForm);
+            return options.beforeSubmit.call(this, disForm);
           }
           if (curFormAjax) {
             $.ajax({
