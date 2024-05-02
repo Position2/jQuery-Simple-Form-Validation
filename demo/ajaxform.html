@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>jQuery Simple Form Validation - Ajax Submit</title>
   <link rel="stylesheet" href="bootstrap.min.css">
   <link rel="stylesheet" href="style.css">
-  <script src="jquery-1.11.2.min.js"></script>
+  <script src="./jquery-3.7.0.min.js"></script>
   <script src="../dist/simpleValidation.min.js"></script>
 </head>
+
 <body>
   <header id="Header">
     <div class="container">
@@ -16,7 +18,8 @@
   </header>
   <div class="container">
     <h2>JQuery Simple Form Validation</h2>
-    <form class="form-horizontal validationdemoform" data-sfv-ajax="true" method="post" action="ajax.php" id="formsimplevalidation">
+    <form class="form-horizontal validationdemoform" data-sfv-ajax="true" method="post" action="ajax.php"
+      id="formsimplevalidation">
       <div class="form-group">
         <label for="inputFirstname" class="control-label">First name
           <abbr title="required">*</abbr>
@@ -84,20 +87,21 @@
       </div>
       <div class="form-group">
         <div class="checkbox terms_cond">
-          <input type="checkbox" name="t&c" id="t&c" data-sfv-required="yes" data-sfv-require-errorMsg="Please accept terms & condition">
+          <input type="checkbox" name="t&c" id="t&c" data-sfv-required="yes"
+            data-sfv-require-errorMsg="Please accept terms & condition">
           <label for="t&c">
             <abbr title="required">*</abbr> I accept the Terms and Conditions</label>
         </div>
       </div>
       <div class="form-group submit">
-          <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary">Submit</button>
       </div>
     </form>
   </div>
   <script>
-  $(document).ready(function() {
-    $("#formsimplevalidation").simpleValidation();
-  })
+    $(document).ready(function () {
+      $("#formsimplevalidation").simpleValidation();
+    })
   </script>
 </body>
 
