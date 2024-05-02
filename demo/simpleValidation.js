@@ -1,161 +1,261 @@
 /**
- * jQuery Simple Form Validation
+ * JQuery Simple Form Validation
  * Copyright (c) 2017 Position2 Inc.
  * Licensed under MIT (http://opensource.org/licenses/MIT)
  * https://github.com/Position2/jQuery-Simple-Form-Validation
  */
 (function ($) {
-	$.fn.simpleValidation = function (options, callback) {
-		var settings = $.extend(
+	$.fn.simpleValidation = function (opts, callback) {
+		var options = $.extend(
 			{
 				errorFieldClass: "error",
 				errorMsgTag: "span",
 				errorMsgClass: "errormsg",
 				errorMsg: "Required Field",
 				otherErrorMsg: {
-					email: "Please enter a valid email",
-					companyemail: "Please enter a company email",
+					email: "Please enter valid email",
+					companyemail: "Please enter company email",
 					alphabet: "Please enter letters only",
-					alphabetwithspace: "Please enter letters and spaces only",
+					alphabetwithspace: "Please enter letters & space only",
 					number: "Please enter numbers only",
-					numberwithspace: "Please enter numbers and spaces only",
-					alphanumeric: "Please don't enter any special characters or spaces",
-					alphanumericwithspace: "Please don't enter any special characters",
+					numberwithspace: "Please enter numbers & space only",
+					alphanumeric: "Please don't enter any special character or space",
+					alphanumericwithspace: "Please don't enter any special character",
 					compare: "Please enter the same value again",
-					minlength: "Please enter a minimum of {n} characters",
+					minlength: "Please enter minimum {n} letters",
 				},
-				beforeSubmit: function () {},
+				beforeSubmit: "",
 			},
-			options,
+			opts,
 		);
-
-		// Remove error message on click
+		// remove errormsg on click
 		$("body").on(
 			"click",
-			settings.errorMsgTag + "." + settings.errorMsgClass,
+			options.errorMsgTag + "." + options.errorMsgClass,
 			function () {
 				$(this).fadeOut(function () {
 					$(this).remove();
 				});
 			},
 		);
-
 		return this.each(function () {
-			var form = $(this),
-				ajax = form.attr("data-sfv-ajax") || false,
-				minLen = form.attr("data-sfv-minlength") || 0,
-				requiredElems = form.find("[data-sfv-required='yes']"),
-				compareElem = $("[data-sfv-compare]", form);
-
-			// Disable HTML5 default validation
-			form.attr("novalidate", "");
-
-			// Add error message
-			function addErrorMessage(element, message, isErrorClass) {
-				var target = $(element);
-				if (!isErrorClass) target.addClass(settings.errorFieldClass);
-				if (target.next("." + settings.errorMsgClass).length <= 0)
-					$("<" + settings.errorMsgTag + "/>", {
-						class: settings.errorMsgClass,
-						text: message,
-					}).insertAfter(target);
+			var curForm = $(this),
+				curFormAjax = curForm.attr("data-sfv-ajax") || false,
+				curFormMinL = curForm.attr("data-sfv-minlength") || 0,
+				valChRaElems = $(
+					"input[data-sfv-required='yes'][type='checkbox'],input[data-sfv-required='yes'][type='radio']",
+					curForm,
+				),
+				valElems = $(
+					"input[data-sfv-required='yes'],input[data-sfv-validation]:not(input[data-sfv-required='yes']),input[data-sfv-regex]:not(input[data-sfv-required='yes']),input[data-sfv-compare]:not(input[data-sfv-required='yes']),input[data-sfv-minlength]:not(input[data-sfv-required='yes']),select[data-sfv-required='yes'],textarea[data-sfv-required='yes']",
+					curForm,
+				).not(valChRaElems),
+				cmpElem = $("input[data-sfv-compare]", curForm),
+				emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/,
+				ComEmailReg =
+					/^([\w+\-\.]+@(?!gmail.com)(?!hotmail.com)(?!live.com)(?!outlook.com)(?!yahoo.com)(?!ymail.com)(?!rocketmail.com)(?!aol.com)(?!mac.comme.com)(?!icloud.com)(?!inbox.com)(?!sina.com)(?!qq.com)(?!foxmail.com)(?!163.com)(?!126.com)(?!189.cn 263.net)(?!yeah.net)(?!gmx.com)(?!gmx.net)(?!mail.com)(?!mail.ru)(?!rambler.ru)(?!lenta.ru)(?!autorambler.ru)(?!myrambler.ru)(?!ro.ru)(?!yandex.ru)(?!zoho.com)(?!msn.com)(?!webtown.com)(?!rediffmail.com)([\w\-]+\.)+[\w\-]{2,4})?$/,
+				alphaReg = /^[A-Za-z]+$/,
+				numericReg = /^[0-9]+$/,
+				alphanumericReg = /^[0-9a-zA-Z]+$/,
+				alphaWSReg = /^[A-Za-z ]+$/,
+				numericWSReg = /^[0-9 ]+$/,
+				alphanumericWSReg = /^[0-9a-zA-Z ]+$/,
+				errorElem = $("<" + options.errorMsgTag + "/>", {
+					class: options.errorMsgClass,
+				});
+			if (cmpElem.length > 0) {
+				valElems = valElems.add($(cmpElem.attr("data-sfv-compare")));
 			}
-
-			// Remove error message
-			function removeErrorMessage(element) {
-				var target = $(element),
-					nextErrorMessage = target.next("." + settings.errorMsgClass);
-				target.removeClass(settings.errorFieldClass);
-				if (nextErrorMessage.length > 0) nextErrorMessage.remove();
+			//Disable HTML5 default validation
+			curForm.attr("novalidate", "");
+			//Add Erro message
+			function addErrorMsg(elem, msg, errorClassno) {
+				var dis = $(elem);
+				if (!errorClassno) dis.addClass(options.errorFieldClass);
+				if (dis.next("." + options.errorMsgClass).length <= 0)
+					errorElem.clone().text(msg).insertAfter(dis);
 			}
-
-			// Validate input
-			function validateInput(input) {
-				var element = $(input),
-					value = element.val().trim(),
-					required = element.attr("data-sfv-required"),
-					minLength = element.attr("data-sfv-minlength") || 0,
-					pattern = element.attr("data-sfv-regex"),
-					compare = element.attr("data-sfv-compare"),
-					compareElement = $(compare),
-					compareValue = compare ? compareElement.val().trim() : "",
-					patternErrorMessage = element.attr("data-sfv-regEx-errorMsg"),
-					requiredErrorMessage = element.attr("data-sfv-require-errorMsg");
-
-				if (value !== "") {
-					if (pattern) {
-						pattern = new RegExp("^" + pattern + "$");
-						!pattern.test(value)
-							? addErrorMessage(
-									element,
-									patternErrorMessage || settings.errorMsg,
+			//Remove Error Message
+			function removeErrorMsg(elem) {
+				var dis = $(elem),
+					nErrorElem = dis.next("." + options.errorMsgClass);
+				dis.removeClass(options.errorFieldClass);
+				if (nErrorElem.length > 0) nErrorElem.remove();
+			}
+			//Validate text,email,select
+			function validate(elem) {
+				var dis = $(elem),
+					disVal = dis.val().trim(),
+					disName = dis.attr("name"),
+					disRequ = dis.attr("data-sfv-required"),
+					disMinL = dis.attr("data-sfv-minlength") || 0,
+					disPattern = dis.attr("data-sfv-regex"),
+					disCompare = dis.attr("data-sfv-compare"),
+					disCompareElem = $(disCompare),
+					compareElem = $("[data-sfv-compare]", curForm),
+					compareElemW = $(compareElem.attr("data-sfv-compare")),
+					disCompareVal =
+						disCompare != "" && typeof disCompare != "undefined"
+							? disCompareElem.val().trim()
+							: "",
+					disPatErrorMsg = dis.attr("data-sfv-regEx-errorMsg"),
+					disRequErrorMsg = dis.attr("data-sfv-require-errorMsg");
+				if (disVal != "") {
+					if (
+						dis.attr("type") == "companyemail" ||
+						dis.attr("data-sfv-validation") == "companyemail"
+					) {
+						if (!emailReg.test(disVal)) {
+							addErrorMsg(dis, disPatErrorMsg || options.otherErrorMsg.email);
+						} else if (!ComEmailReg.test(disVal)) {
+							addErrorMsg(
+								dis,
+								disPatErrorMsg || options.otherErrorMsg.companyemail,
+							);
+						} else {
+							removeErrorMsg(dis);
+						}
+					} else if (
+						dis.attr("type") == "email" ||
+						dis.attr("data-sfv-validation") == "email"
+					) {
+						!emailReg.test(disVal)
+							? addErrorMsg(dis, disPatErrorMsg || options.otherErrorMsg.email)
+							: removeErrorMsg(dis);
+					} else if (dis.attr("data-sfv-validation") == "alpha") {
+						!alphaReg.test(disVal)
+							? addErrorMsg(
+									dis,
+									disPatErrorMsg || options.otherErrorMsg.alphabet,
 							  )
-							: removeErrorMessage(element);
-					} else if (compare && value !== compareValue) {
-						addErrorMessage(compareElement, settings.otherErrorMsg.compare);
-					} else if (minLength > 0 && value.length < minLength) {
-						addErrorMessage(
-							element,
-							settings.otherErrorMsg.minlength.replace("{n}", minLength),
-						);
+							: removeErrorMsg(dis);
+					} else if (dis.attr("data-sfv-validation") == "alphawithspace") {
+						!alphaWSReg.test(disVal)
+							? addErrorMsg(
+									dis,
+									disPatErrorMsg || options.otherErrorMsg.alphabetwithspace,
+							  )
+							: removeErrorMsg(dis);
+					} else if (dis.attr("data-sfv-validation") == "number") {
+						!numericReg.test(disVal)
+							? addErrorMsg(dis, disPatErrorMsg || options.otherErrorMsg.number)
+							: removeErrorMsg(dis);
+					} else if (dis.attr("data-sfv-validation") == "numberwithspace") {
+						!numericWSReg.test(disVal)
+							? addErrorMsg(
+									dis,
+									disPatErrorMsg || options.otherErrorMsg.numberwithspace,
+							  )
+							: removeErrorMsg(dis);
+					} else if (dis.attr("data-sfv-validation") == "alphanumeric") {
+						!alphanumericReg.test(disVal)
+							? addErrorMsg(
+									dis,
+									disPatErrorMsg || options.otherErrorMsg.alphanumeric,
+							  )
+							: removeErrorMsg(dis);
+					} else if (
+						dis.attr("data-sfv-validation") == "alphanumericwithspace"
+					) {
+						!alphanumericWSReg.test(disVal)
+							? addErrorMsg(
+									dis,
+									disPatErrorMsg || options.otherErrorMsg.alphanumericwithspace,
+							  )
+							: removeErrorMsg(dis);
+					} else if (disPattern != "" && typeof disPattern != "undefined") {
+						disPattern = new RegExp("^" + disPattern + "$");
+						!disPattern.test(disVal)
+							? addErrorMsg(dis, disPatErrorMsg || options.errorMsg)
+							: removeErrorMsg(dis);
+					} else if (
+						disCompare != "" &&
+						typeof disCompare != "undefined" &&
+						disCompareElem.length > 0 &&
+						disCompareVal != ""
+					) {
+						disVal != disCompareVal
+							? addErrorMsg(
+									disCompareElem,
+									disPatErrorMsg || options.otherErrorMsg.compare,
+							  )
+							: removeErrorMsg(disCompareElem);
+					} else if (
+						compareElemW.attr("id") == dis.attr("id") &&
+						typeof compareElemW.attr("id") != "undefined"
+					) {
+						disVal != compareElem.val()
+							? addErrorMsg(
+									dis,
+									disPatErrorMsg || options.otherErrorMsg.compare,
+							  )
+							: removeErrorMsg(dis);
+					} else if (disMinL > 0 || curFormMinL > 0) {
+						if (disMinL > 0 && disVal.length < disMinL) {
+							var MLerrorMsg = (
+								disPatErrorMsg || options.otherErrorMsg.minlength
+							).replace("{n}", disMinL);
+							addErrorMsg(dis, MLerrorMsg);
+						} else if (
+							disMinL <= 0 &&
+							curFormMinL.length > 0 &&
+							disVal.length < curFormMinL
+						) {
+							var MLerrorMsg = (
+								disPatErrorMsg || options.otherErrorMsg.minlength
+							).replace("{n}", curFormMinL);
+							addErrorMsg(dis, MLerrorMsg);
+						} else {
+							removeErrorMsg(dis);
+						}
 					} else {
-						removeErrorMessage(element);
+						removeErrorMsg(dis);
 					}
-				} else if (required === "yes") {
-					addErrorMessage(element, requiredErrorMessage || settings.errorMsg);
+				} else if (disRequ == "yes") {
+					addErrorMsg(dis, disRequErrorMsg || options.errorMsg);
 				}
 			}
-
-			// Validate checkbox and radio button
-			function validateCheckboxRadio(element) {
-				var group = $(element).attr("name"),
-					errorMessage = $(element).attr("data-sfv-require-errorMsg");
-				if ($("[name='" + group + "']:checked").length === 0) {
-					addErrorMessage(
-						$("[name='" + group + "']")
-							.last()
-							.next()[0],
-						errorMessage || settings.errorMsg,
-						true,
-					);
-				} else {
-					removeErrorMessage(
-						$("[name='" + group + "']")
-							.last()
-							.next()[0],
-					);
-				}
+			//Validate checkbox,radio button
+			function validateChRb(elem) {
+				var dis = $(elem),
+					disname = dis.attr("name"),
+					disRequErrorMsg = dis.attr("data-sfv-require-errorMsg");
+				(disSibElem = $("[name='" + disname + "']", curForm)),
+					(disSibLElem = disSibElem.last()[0].nextSibling);
+				!disSibElem.is(":checked")
+					? addErrorMsg(disSibLElem, disRequErrorMsg || options.errorMsg, true)
+					: removeErrorMsg(disSibLElem);
 			}
-
-			// On form submit
-			form.on("submit", function (e) {
-				var formData = $(this);
-				requiredElems.each(function () {
-					var type = $(this).attr("type");
-					type === "checkbox" || type === "radio"
-						? validateCheckboxRadio(this)
-						: validateInput(this);
+			//on Form submit
+			curForm.on("submit", function (e) {
+				var disForm = $(this);
+				valElems.add(valChRaElems).each(function () {
+					var disType = $(this).attr("type");
+					disType == "checkbox" || disType == "radio"
+						? validateChRb(this)
+						: validate(this);
 				});
 				if (
-					formData.find(
+					$(
 						"." +
-							settings.errorFieldClass +
-							":visible, ." +
-							settings.errorMsgClass +
+							options.errorFieldClass +
+							":visible,." +
+							options.errorMsgClass +
 							":visible",
-					).length === 0
+						$(this),
+					).length <= 0
 				) {
-					if (typeof settings.beforeSubmit === "function") {
-						return settings.beforeSubmit.call(this, formData);
+					if (typeof options.beforeSubmit == "function") {
+						return options.beforeSubmit.call(this, disForm);
 					}
-					if (ajax) {
+					if (curFormAjax) {
 						$.ajax({
-							type: form.attr("method"),
-							url: form.attr("action"),
-							data: formData.serialize(),
+							type: curForm.attr("method"),
+							url: curForm.attr("action"),
+							data: disForm.serialize(),
 							success: function (data) {
-								if (typeof callback === "function") {
-									callback.call(this, data, formData);
+								if (typeof callback == "function") {
+									callback.call(this, data, disForm);
 								}
 							},
 						});
@@ -166,23 +266,18 @@
 				}
 				e.preventDefault();
 			});
-
-			// On focus
-			form.find("input, select, textarea").on("focus", function () {
-				removeErrorMessage(this);
+			//On Focus
+			valElems.on("focus", function (e) {
+				removeErrorMsg(e.target);
 			});
-
-			// On blur
-			form.find("input, select, textarea").on("blur", function () {
-				validateInput(this);
+			//On Blur
+			valElems.on("blur", function (e) {
+				validate(e.target);
 			});
-
-			// On click for checkbox and radio button
-			form
-				.find("input[type='checkbox'], input[type='radio']")
-				.on("click", function () {
-					validateCheckboxRadio(this);
-				});
+			//On click : checkbox & radiobutton
+			valChRaElems.on("click", function (e) {
+				validateChRb(e.target);
+			});
 		});
 	};
 })(jQuery);

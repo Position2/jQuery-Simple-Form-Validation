@@ -20,16 +20,16 @@
   <div class="container">
     <h2>JQuery Simple Form Validation</h2>
     <form class="form-horizontal validationdemoform"
-      action="https://position2.github.io/jQuery-Simple-Form-Validation/demo/" data-sfv-minlength="2"
+      action="http://position2.github.io/jQuery-Simple-Form-Validation/demo/" data-sfv-minlength="2"
       id="formsimplevalidation">
       <div class="form-group">
-        <label for="inputFirstname" class="control-label">First name
+        <label for="inputFirstname" class="control-label">Firstname
           <abbr title="required">*</abbr>
         </label>
         <input type="text" data-sfv-required="yes" class="form-control" data-sfv-minlength="3" id="inputfirstname">
       </div>
       <div class="form-group">
-        <label for="inputLastname" class="control-label">Last name
+        <label for="inputLastname" class="control-label">Lastname
           <abbr title="required">*</abbr>
         </label>
         <input type="text" data-sfv-required="yes" class="form-control" data-sfv-minlength="1" id="inputlastname">
@@ -45,8 +45,8 @@
           <abbr title="required">*</abbr>
         </label>
         <input type="text" data-sfv-required="yes" class="form-control"
-          data-sfv-regEx="^\+?\d{0,3}\s?\(?\d{1,4}\)?[\s.-]?\d{1,4}[\s.-]?\d{1,4}$"
-          data-sfv-regEx-errorMsg="Please enter valid Phone no" placeholder="+99(99)9999-9999" id="inputphone">
+          data-sfv-regEx="[+]\d{2}[(]\d{2}[)]\d{4}[-]\d{4}" data-sfv-regEx-errorMsg="Please enter valid Phone no"
+          placeholder="+99(99)9999-9999" id="inputphone">
       </div>
       <div class="form-group">
         <label for="inputStreet" class="control-label">Street
